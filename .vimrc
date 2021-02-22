@@ -19,7 +19,7 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-commentary'
 Plug 'yggdroot/leaderf'
-Plug 'majutsushi/tagbar'
+Plug 'preservim/tagbar'
 call plug#end()
 
 " Coc extentions
