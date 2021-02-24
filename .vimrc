@@ -7,7 +7,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'mhinz/vim-startify'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'yggdroot/indentline'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -19,7 +18,6 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-commentary'
 Plug 'yggdroot/leaderf'
-Plug 'preservim/tagbar'
 call plug#end()
 
 " Coc extentions
@@ -37,7 +35,15 @@ let g:coc_global_extensions = [
   \ 'coc-css',
   \ 'coc-vimlsp',
   \ 'coc-translator',
-  \ 'coc-snippets'
+  \ 'coc-snippets',
+  \ 'coc-angular',
+  \ 'coc-html-css-support',
+  \ 'coc-xml',
+  \ 'coc-highlight',
+  \ 'coc-cssmodules',
+  \ 'coc-calc',
+  \ 'coc-emmet',
+  \ 'coc-powershell'
   \]
 
 " Coc configurations
@@ -113,14 +119,22 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
+if v:vim_did_enter
+  execute('AirlineTheme bubblegum')
+else
+  au VimEnter * execute('AirlineTheme bubblegum')
+endif
+
 " mappings
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 nmap ss <Plug>(easymotion-s2)
 
 nnoremap <leader>v :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
-nnoremap <C-p> :Leaderf file<CR>
+nnoremap <C-p> :Files<CR>
 nnoremap <leader>t :CocCommand translator.popup<CR>
+nnoremap <leader>ps :terminal powershell<CR>
+
