@@ -14,7 +14,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'brooth/far.vim'
 Plug 'morhetz/gruvbox'
 Plug 'sbdchd/neoformat'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-commentary'
 Plug 'yggdroot/leaderf'
@@ -22,12 +21,12 @@ call plug#end()
 
 " Coc extentions
 let g:coc_global_extensions = [
-  \ 'coc-prettier',
   \ 'coc-html', 
   \ 'coc-eslint',
   \ 'coc-yaml',
   \ 'coc-xml',
   \ 'coc-vetur',
+  \ 'coc-prettier',
   \ 'coc-tsserver',
   \ 'coc-python',
   \ 'coc-pyright',
@@ -45,6 +44,24 @@ let g:coc_global_extensions = [
   \ 'coc-emmet',
   \ 'coc-powershell'
   \]
+
+" === add these contents to the CocConfig
+"{
+ "eslint.autoFixOnSave": true,
+ "coc.preferences.extensionUpdateCheck": "daily",
+ "prettier.eslintIntegration": true
+"}
+" === end of CocConfig
+
+" prettier config
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+nnoremap <leader>p :Prettier<CR>
+
+" leaderf config
+let g:Lf_WildIgnore = {
+  \ 'dir': ['.svn','.git','.vscode','node_modules','dist','.idea'],
+  \ 'file': ['.DS_Store','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
+  \}
 
 " Coc configurations
 set hidden
@@ -134,7 +151,11 @@ nmap ss <Plug>(easymotion-s2)
 
 nnoremap <leader>v :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
-nnoremap <C-p> :Files<CR>
+nnoremap <C-p> :Leaderf file<CR>
 nnoremap <leader>t :CocCommand translator.popup<CR>
 nnoremap <leader>ps :terminal powershell<CR>
-
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i
+inoremap ( ()<ESC>i
+inoremap { {}<ESC>i
+inoremap [ []<ESC>i
